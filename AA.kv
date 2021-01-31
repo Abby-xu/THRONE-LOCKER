@@ -1,0 +1,280 @@
+<LoginForm>:
+
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: [30, 30, 30, 30]
+        spacing: 3
+        Image: 
+            source: 'a.png'
+            size_hint_x: 0.5
+            size_hint_y: 2
+            allow_stretch: True
+            keep_ratio: True
+        Label:
+            text: 'THRONE LOCKERS'
+            color: 0, 0, 0, 1
+            font_size:80
+
+
+        Label:
+            text: 'Name'
+            color: 0, 0, 0, 1
+            font_size: 50
+            text_size: self.size
+            halign: 'left'
+            size_hint_y: 0.6
+        TextInput:
+            id: usernameField
+            multiline: False
+            write_tab: False
+            size_hint_y: 0.8
+            font_size: 100
+        Label:
+            text: 'Email'
+            color: 0, 0, 0, 1
+            font_size: 50
+            text_size: self.size
+            halign: 'left'
+            size_hint_y: 0.6
+        TextInput:
+            id: passwordField
+            password: False
+            multiline: False
+            write_tab: False
+            size_hint_y: 0.8
+            font_size: 100
+        BoxLayout:
+            Label:
+                text: "Safe travel! \nThanks and Gig'em :)"
+                color: 0.8, 0.2, 0.2, 1
+                font_size: 40
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                size_hint_y: 1.2
+
+        Button:
+            
+            background_color: 0, 0.2, 0.9, 0.5
+            id: submit
+            text: 'Submit'
+            font_size: 50
+            on_press: root.submit(usernameField.text, passwordField.text)
+            size_hint_y: 1.2
+        BoxLayout:
+            id: bottom_box
+            orientation: "horizontal"
+            padding: 2
+            spacing: 2
+            size: root.width,100
+
+            Button:
+                text: "Shop"
+                font_size: 40
+                background_color: 0, 0.2, 0.9, 0.5
+                on_press: root.shop_submit()
+            Button:
+                text: "Flight Info"
+                font_size: 40
+                background_color: 0, 0.2, 0.9, 0.5
+                on_press: root.website_function()
+            Button:
+                text: "Aircraft Model"
+                font_size: 40
+                background_color: 0, 0.2, 0.9, 0.5
+                on_press: root.aircraft_function()
+            Button:
+                text: "Quit"
+                font_size: 40
+                background_color: 0, 0.2, 0.9, 0.5
+                on_press: app.stop()
+
+
+<LoginErrorPopup>
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: root.msg
+        Button:
+            text: 'Close'
+            pos_hint: {'center_x': .5}
+            size_hint: (.5, .3)
+            on_press: root.dismiss()
+
+<SuccessScreen>
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: [30, 30, 30, 30]
+        Label:
+            text: 'Successfully logged in!'
+            font_size: 100
+        Button:
+            text: "I want to reserve my package"
+            font_size: 50
+            background_color: 0, 0.2, 0.9, 0.5
+            on_press: app.root.current = 'Reserved'
+        Button:
+            text: "I want to take my package"
+            font_size: 50
+            background_color: 0, 0.2, 0.9, 0.5
+            on_press: app.root.current = 'Take'
+
+<Reserved_Screen>
+    name: 'Reserved'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: "Please open the box #6"
+            bold: True
+            font_size: 100
+        Image:
+            source: 'images/2.gif'
+        Button:
+            text: "Back to login page"
+            font_size: 50
+            size_hint_y: 0.2
+            background_color: 0, 0.2, 0.9, 0.5
+            on_press:  app.root.current = 'login'
+
+<Take_Screen>
+    name: 'Take'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: "Please take all of your items"
+            bold: True
+            font_size: 80
+        Image:
+            source: 'images/1.png'
+        Button:
+            text: "Back to login page"
+            font_size: 50
+            size_hint_y: 0.2
+            background_color: 0, 0.2, 0.9, 0.5
+            on_press:  app.root.current = 'login'
+
+<Shop_Screen>
+    name: 'Shop'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Button:
+            text: "Back to login page"
+            font_size: 50
+            size_hint_y: 0.5
+            background_color: 0, 0.2, 0.9, 0.5
+            on_press:  app.root.current = 'login'
+        BoxLayout:
+            padding:5
+            Image:
+                source: 'images/cdb.png'
+            Label:
+                text: "01 Power Bank"
+                bold: True
+                font_size: 50
+            Label:
+                text: "R$ 15,00"
+                font_size: 50
+        BoxLayout:
+            padding: 5
+            Image:
+                source: 'images/ys.png'
+            Label:
+                text: "02 Umbrella"
+                bold: True
+                font_size:50
+            Label:
+                text: "R$ 10,00"
+                font_size: 50
+
+        BoxLayout:
+            padding: 5
+            Image:
+                source: 'images/yz.png'
+            Label:
+                text: "03 Blindfold"
+                bold: True
+                font_size:50
+            Label:
+                text: "R$ 8,00"
+                font_size: 50
+
+        BoxLayout:
+            padding: 5
+            Image:
+                source: 'images/b.jpg'
+            Label:
+                text: "04 Pen"
+                bold: True
+                font_size:50
+            Label:
+                text: "R$ 5,00"
+                font_size: 50
+
+<Aircraft_Screen>
+    name: 'Aircraft'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .6, .81, .99, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: [30, 30, 30, 30]
+        spacing: 3
+        orientation: 'vertical'
+        Image: 
+            source: 'images/738.png'
+            allow_stretch: True
+            keep_ratio: True
+        Label:
+            text: 'Model: 738 \nPassager Capacity: Total 160, Main 144, First Class 16 \nSpeed: 400'
+            font_size: 40
+
+        Image:
+            source: 'images/757.png'
+
+        Label:
+            text: 'Model: 757 \nPassager Capacity: Total 176, Main 160, First Class 16 \nSpeed: 380'
+            font_size: 40
+        Image:
+            source: 'images/A321.png'
+        Label:
+            text: 'Model: A321 \nPassager Capacity: Total 181, Main 165, First Class 16 \nSpeed: 400'
+            font_size: 40
+        Button:
+            text: "Back to Menu"
+            font_size: 50
+            background_color: 0, 0.2, 0.9, 0.5
+            size_hint_y: 0.5
+            on_press:  app.root.current = 'login'
